@@ -19,8 +19,9 @@ class MainNavigationController: UINavigationController {
     }
     
     private func onItemSelected(cityName: String) {
-    //    let fullImage = FullScreenCityController()
-      //  fullImage.cityName = cityName
+        
+      //  let fullImage = FullScreenCityController()
+     //   fullImage.cityName = cityName
        // pushViewController(fullImage, animated: true)
         let weather = WeatherViewController()
         weather.cityName = cityName
