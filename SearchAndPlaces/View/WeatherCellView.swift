@@ -11,16 +11,6 @@ import SnapKit
 
 class WeatherCellView: UIView {
     
-    struct СellData {
-        
-        var icon: Data //Перепроверь что точно дата
-        var description: String
-        var time: String
-        var temperature: Float
-    }
-    
-    var data: СellData?
-    
     var iconImageView: UIImageView?
     var destributionTimeStackView: UIStackView?
     var temperatureLabel: UILabel?
@@ -28,7 +18,7 @@ class WeatherCellView: UIView {
     private var timeLabel: UILabel?
     private var descriptionLabel: UILabel?
     
-    func prepare() {
+    func prepare(inputData: WeatherCellView.СellData) {
         
         self.layer.cornerRadius = 30
         self.backgroundColor = .darkGray
@@ -36,7 +26,7 @@ class WeatherCellView: UIView {
         let temperatureLabel = UILabel()
         self.addSubview(temperatureLabel)
         self.temperatureLabel = temperatureLabel
-        temperatureLabel.text = "8°"
+        temperatureLabel.text = String(inputData.temperature) + "°"
         temperatureLabel.textColor = .white
         temperatureLabel.snp.makeConstraints { maker in
             maker.top.equalToSuperview().inset(10)
@@ -53,7 +43,7 @@ class WeatherCellView: UIView {
             maker.centerX.equalToSuperview()
         }
         
-        let urlForImage = URL(string: "https://openweathermap.org/img/wn/04d@2x.png")
+        let urlForImage = URL(string: "https://openweathermap.org/img/wn/\(inputData.icon)@2x.png")
         let data = try? Data(contentsOf: urlForImage!)
         iconImageView.image = UIImage(data: data!)
         
@@ -70,14 +60,14 @@ class WeatherCellView: UIView {
         
         let descriptionLabel = UILabel()
         destributionTimeStackView.addArrangedSubview(descriptionLabel)
-        descriptionLabel.text = "Description"
+        descriptionLabel.text = inputData.description
         descriptionLabel.textColor = .white
         descriptionLabel.textAlignment = .center
         
         let timeLabel = UILabel()
         destributionTimeStackView.addArrangedSubview(timeLabel)
         self.timeLabel = timeLabel
-        timeLabel.text = "XX.XX"
+        timeLabel.text = inputData.time
         timeLabel.textColor = .white
         timeLabel.textAlignment = .center
     }

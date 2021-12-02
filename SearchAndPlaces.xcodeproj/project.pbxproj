@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		854CE7EF27597E1F00F0AA5C /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854CE7EE27597E1F00F0AA5C /* WeatherService.swift */; };
 		856C8EB6273ABFAD008C2126 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856C8EB5273ABFAD008C2126 /* AppDelegate.swift */; };
 		856C8EB8273ABFAD008C2126 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856C8EB7273ABFAD008C2126 /* SceneDelegate.swift */; };
 		856C8EBA273ABFAD008C2126 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856C8EB9273ABFAD008C2126 /* ViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		854CE7EE27597E1F00F0AA5C /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		856C8EB2273ABFAD008C2126 /* SearchAndPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchAndPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		856C8EB5273ABFAD008C2126 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		856C8EB7273ABFAD008C2126 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		856C8EDA273EA864008C2126 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				854CE7EE27597E1F00F0AA5C /* WeatherService.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				854CE7EF27597E1F00F0AA5C /* WeatherService.swift in Sources */,
 				856C8EBA273ABFAD008C2126 /* ViewController.swift in Sources */,
 				85FEA4572741745C003BC211 /* MapController.swift in Sources */,
 				85D996782757BC8B00FAAFC4 /* WeatherCellView.swift in Sources */,

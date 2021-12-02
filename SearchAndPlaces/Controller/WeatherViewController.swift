@@ -19,12 +19,12 @@ struct Response: Codable {
         let icon: String
     }
         
-    struct coord: Codable {
+    struct Coord: Codable {
         let lat: Double
         let lon: Double
     }
     
-    struct hourly: Codable {
+    struct Hourly: Codable {
         let temp: Float
         let icon: String
         let weather: Weather
@@ -32,7 +32,7 @@ struct Response: Codable {
     
     let lat: Double
     let lon: Double
-    let hourly: [hourly]
+    let hourly: [Hourly]
 }
 
 class WeatherViewController: UIViewController {
@@ -63,7 +63,8 @@ class WeatherViewController: UIViewController {
     func setupCellView() {
         
         let cellView = WeatherCellView()
-        cellView.prepare()
+        let data = WeatherCellView.СellData(icon: "04n",description: "снег", time:  "23.00", temperature: 2 )
+        cellView.prepare(inputData: data)
         view.addSubview(cellView)
         
         cellView.snp.makeConstraints { maker in
