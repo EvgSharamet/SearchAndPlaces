@@ -64,11 +64,44 @@ class WeatherViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
+        setupCellView()
         
         do {
             
             try printWeather() } catch {
             print("Error")
+        }
+    }
+    
+    func setupCellView() {
+        
+        let cellView = WeatherCellView()
+        cellView.prepare()
+        view.addSubview(cellView)
+        
+        cellView.snp.makeConstraints { maker in
+            maker.height.equalTo(140)
+            maker.width.equalTo(110)
+            maker.centerX.equalToSuperview()
+            maker.bottom.equalToSuperview().inset(20)
+        }
+        
+        cellView.layer.cornerRadius = 30
+        cellView.iconImageView?.snp.makeConstraints { maker in
+            maker.top.equalToSuperview()
+            maker.centerX.equalToSuperview()
+        }
+        
+        cellView.destributionTimeStackView?.snp.makeConstraints { maker in
+            maker.bottom.equalToSuperview()
+            maker.centerX.equalToSuperview()
+            maker.height.equalTo(cellView.snp.height).inset(40)
+        }
+        
+        cellView.temperatureLabel?.snp.makeConstraints { maker in
+            maker.top.equalToSuperview().inset(10)
+            maker.rightMargin.equalToSuperview().inset(10)
+            maker.height.equalTo(30)
         }
     }
     
@@ -147,7 +180,7 @@ class WeatherViewController: UIViewController {
             do{
                 try self.createUrl()
             } catch {
-                print( " Error here")
+                print( "Error here")
             }
         }
     }
@@ -189,7 +222,7 @@ class WeatherViewController: UIViewController {
             //print( answer.main.temp )
         
        //     let urlForImage = URL(string: "https://openweathermap.org/img/wn/\(answer.weather[0].icon)@2x.png")
-       //     let data = try? Data(contentsOf: urlForImage!)
+   //         let data = try? Data(contentsOf: urlForImage!)
       //      weatherIconImageView?.image = UIImage(data: data!)
         } catch {
         
@@ -199,7 +232,6 @@ class WeatherViewController: UIViewController {
     }
     
     func getCoordinateFrom(address: String, completion: @escaping(_ coordinate: CLLocationCoordinate2D?, _ error: Error?) -> () ) {
-        
         CLGeocoder().geocodeAddressString(address) { completion($0?.first?.location?.coordinate, $1) }
     }
 }
