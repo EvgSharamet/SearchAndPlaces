@@ -72,24 +72,6 @@ class WeatherViewController: UIViewController {
             maker.centerX.equalToSuperview()
             maker.bottom.equalToSuperview().inset(20)
         }
-        
-        cellView.layer.cornerRadius = 30
-        cellView.iconImageView?.snp.makeConstraints { maker in
-            maker.top.equalToSuperview()
-            maker.centerX.equalToSuperview()
-        }
-        
-        cellView.destributionTimeStackView?.snp.makeConstraints { maker in
-            maker.bottom.equalToSuperview()
-            maker.centerX.equalToSuperview()
-            maker.height.equalTo(cellView.snp.height).inset(40)
-        }
-        
-        cellView.temperatureLabel?.snp.makeConstraints { maker in
-            maker.top.equalToSuperview().inset(10)
-            maker.rightMargin.equalToSuperview().inset(10)
-            maker.height.equalTo(30)
-        }
     }
     
     func setupView() {

@@ -11,7 +11,7 @@ import SnapKit
 
 class WeatherCellView: UIView {
     
-    struct cellData {
+    struct СellData {
         
         var icon: Data //Перепроверь что точно дата
         var description: String
@@ -19,7 +19,7 @@ class WeatherCellView: UIView {
         var temperature: Float
     }
     
-    var data: cellData?
+    var data: СellData?
     
     var iconImageView: UIImageView?
     var destributionTimeStackView: UIStackView?
@@ -30,6 +30,7 @@ class WeatherCellView: UIView {
     
     func prepare() {
         
+        self.layer.cornerRadius = 30
         self.backgroundColor = .darkGray
      
         let temperatureLabel = UILabel()
@@ -37,11 +38,20 @@ class WeatherCellView: UIView {
         self.temperatureLabel = temperatureLabel
         temperatureLabel.text = "8°"
         temperatureLabel.textColor = .white
+        temperatureLabel.snp.makeConstraints { maker in
+            maker.top.equalToSuperview().inset(10)
+            maker.rightMargin.equalToSuperview().inset(10)
+            maker.height.equalTo(30)
+        }
         
         let iconImageView = UIImageView()
         self.addSubview(iconImageView)
         self.iconImageView = iconImageView
         iconImageView.contentMode = .scaleAspectFit
+        iconImageView.snp.makeConstraints { maker in
+            maker.top.equalToSuperview()
+            maker.centerX.equalToSuperview()
+        }
         
         let urlForImage = URL(string: "https://openweathermap.org/img/wn/04d@2x.png")
         let data = try? Data(contentsOf: urlForImage!)
@@ -52,6 +62,11 @@ class WeatherCellView: UIView {
         self.addSubview(destributionTimeStackView)
         destributionTimeStackView.axis = .vertical
         destributionTimeStackView.distribution = .fillEqually
+        self.destributionTimeStackView?.snp.makeConstraints { maker in
+            maker.bottom.equalToSuperview()
+            maker.centerX.equalToSuperview()
+            maker.height.equalTo(self.snp.height).multipliedBy(0.5)
+        }
         
         let descriptionLabel = UILabel()
         destributionTimeStackView.addArrangedSubview(descriptionLabel)
