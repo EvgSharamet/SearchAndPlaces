@@ -13,7 +13,6 @@ import CoreLocation
 struct Response: Codable {
     
     struct Weather: Codable {
-        
         let id: Int
         let main: String
         let description: String
@@ -21,13 +20,11 @@ struct Response: Codable {
     }
         
     struct coord: Codable {
-        
         let lat: Double
         let lon: Double
     }
     
     struct hourly: Codable {
-        
         let temp: Float
         let icon: String
         let weather: Weather
@@ -41,19 +38,14 @@ struct Response: Codable {
 class WeatherViewController: UIViewController {
     
     enum Exception: Error {
-        
         case ServerError
         case ParsingError
+        case JsonParsingError
     }
     
     public var cityName: String?
     
-    private var cityСoordinates: CLLocationCoordinate2D? {
-        didSet {
-            print("cityСoordinates didSet: \(cityСoordinates)")
-        }
-    }
-    
+    private var cityСoordinates: CLLocationCoordinate2D?
     private var weatherIconImageView: UIImageView?
     private var weatherDescriptionLabel: UILabel?
     private var weatherTemperatureLabel: UILabel?
@@ -65,12 +57,7 @@ class WeatherViewController: UIViewController {
         
         setupView()
         setupCellView()
-        
-        do {
-            
-            try printWeather() } catch {
-            print("Error")
-        }
+        coordinatesToJson()
     }
     
     func setupCellView() {
@@ -117,59 +104,14 @@ class WeatherViewController: UIViewController {
         view.addSubview(cityNameLabel)
         
         cityNameLabel.snp.makeConstraints{ maker in
-            
             maker.centerX.equalToSuperview()
             maker.top.equalTo(view.safeAreaLayoutGuide).inset(20)
             maker.height.equalTo(80)
             maker.width.equalTo(200)
         }
-        
-        weatherIconImageView = UIImageView()
-        guard let weatherImageView = weatherIconImageView else { return }
-    
-        self.view.addSubview(weatherImageView)
-        
-        weatherImageView.snp.makeConstraints { maker in
-            
-            maker.centerX.equalToSuperview()
-            maker.centerY.equalToSuperview()
-            maker.height.equalTo(100)
-            maker.width.equalTo(100)
-        }
-        
-        weatherDescriptionLabel = UILabel()
-        guard let weatherDescriptionLabel = weatherDescriptionLabel else { return }
-    
-        weatherDescriptionLabel.textColor = .black
-        weatherDescriptionLabel.textAlignment = .center
-        view.addSubview(weatherDescriptionLabel)
-        
-        weatherDescriptionLabel.snp.makeConstraints { maker in
-            
-            maker.centerX.equalToSuperview()
-            maker.top.equalTo(weatherImageView.snp.bottom).inset(20)
-            maker.height.equalTo(40)
-            maker.width.equalTo(300)
-        }
-        
-        weatherTemperatureLabel = UILabel()
-        guard let weatherTemperatureLabel = weatherTemperatureLabel else { return }
-        
-        weatherTemperatureLabel.textColor = .black
-        weatherTemperatureLabel.textAlignment = .center
-        view.addSubview(weatherTemperatureLabel)
-        weatherTemperatureLabel.backgroundColor = .darkGray
-        
-        weatherTemperatureLabel.snp.makeConstraints { maker in
-            
-            maker.centerX.equalToSuperview()
-            maker.top.equalTo(weatherDescriptionLabel).inset(60)
-            maker.height.equalTo(40)
-            maker.width.equalTo(40)
-        }
     }
     
-    func printWeather()  throws {
+    func coordinatesToJson() {
         
         guard let cityName = cityName else {
             return
@@ -178,57 +120,33 @@ class WeatherViewController: UIViewController {
         getCoordinateFrom(address: cityName ) { (location, error) in
             self.cityСoordinates = location
             do{
-                try self.createUrl()
+                try self.jsonToResponse()
             } catch {
                 print( "Error here")
             }
         }
     }
     
-    func createUrl() throws {
+    func jsonToResponse() throws {
         
-        guard let location = cityСoordinates else { return }
-        
-        guard let url = URL( string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(location.latitude)&lon=\(location.longitude)&lang=ru&exclude=minutely,daily&units=metric&appid=167ec7c4487c8b004df1c9b138fb6600")
-        else {
-        
-            print ( "Error in URL" )
+        guard let cityСoordinates = cityСoordinates else {
             return
         }
-        
-        print (url)
-        
-        var jsonString: String = ""
-        
-        do {
-            jsonString =  try String(contentsOf: url, encoding:.utf8)
-        }   catch {
-            
-            print (error.localizedDescription)
+        let decoder = JSONDecoder()
+        guard let url = URL( string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(cityСoordinates.latitude)&lon=\(cityСoordinates.longitude)&lang=ru&exclude=minutely,daily&units=metric&appid=167ec7c4487c8b004df1c9b138fb6600")
+        else {
+            return
         }
-            print ( jsonString )
+
+        guard let jsonString = try? String(contentsOf: url, encoding:.utf8) else {
+            return
+        }
     
-            let decoder = JSONDecoder()
-   
-            let jsonData = Data(jsonString.utf8)
-        
-        do {
-        
-            let answer = try decoder.decode(Response.self, from: jsonData)
-            print ( answer )
-        
-          //  weatherDescriptionLabel?.text = answer.weather[0].description
-            //weatherTemperatureLabel?.text = String (Int (answer.main.temp - 273.15 ) )
-            //print( answer.main.temp )
-        
-       //     let urlForImage = URL(string: "https://openweathermap.org/img/wn/\(answer.weather[0].icon)@2x.png")
-   //         let data = try? Data(contentsOf: urlForImage!)
-      //      weatherIconImageView?.image = UIImage(data: data!)
-        } catch {
-        
-            print(error.localizedDescription)
+        let jsonData = Data(jsonString.utf8)
+        guard let answer = try? decoder.decode(Response.self, from: jsonData) else {
+            return
         }
-        
+        print(answer)
     }
     
     func getCoordinateFrom(address: String, completion: @escaping(_ coordinate: CLLocationCoordinate2D?, _ error: Error?) -> () ) {
