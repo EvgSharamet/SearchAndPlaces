@@ -18,7 +18,7 @@ class WeatherCellView: UIView {
     private var timeLabel: UILabel?
     private var descriptionLabel: UILabel?
     
-    func prepare(inputData: WeatherCellView.СellData) {
+    func prepare(inputData: WeatherService.WeatherInfo) {
         
         self.layer.cornerRadius = 30
         self.backgroundColor = .darkGray

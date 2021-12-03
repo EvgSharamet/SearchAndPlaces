@@ -57,13 +57,12 @@ class WeatherViewController: UIViewController {
         
         setupView()
         setupCellView()
-        coordinatesToJson()
     }
     
     func setupCellView() {
         
         let cellView = WeatherCellView()
-        let data = WeatherCellView.СellData(icon: "04n",description: "снег", time:  "23.00", temperature: 2 )
+        let data = WeatherService.WeatherInfo(icon: "04n",description: "снег", time:  "23.00", temperature: 2 )
         cellView.prepare(inputData: data)
         view.addSubview(cellView)
         
@@ -93,46 +92,5 @@ class WeatherViewController: UIViewController {
             maker.width.equalTo(200)
         }
     }
-    
-    func coordinatesToJson() {
-        
-        guard let cityName = cityName else {
-            return
-        }
-        
-        getCoordinateFrom(address: cityName ) { (location, error) in
-            self.cityСoordinates = location
-            do{
-                try self.jsonToResponse()
-            } catch {
-                print( "Error here")
-            }
-        }
-    }
-    
-    func jsonToResponse() throws {
-        
-        guard let cityСoordinates = cityСoordinates else {
-            return
-        }
-        let decoder = JSONDecoder()
-        guard let url = URL( string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(cityСoordinates.latitude)&lon=\(cityСoordinates.longitude)&lang=ru&exclude=minutely,daily&units=metric&appid=167ec7c4487c8b004df1c9b138fb6600")
-        else {
-            return
-        }
 
-        guard let jsonString = try? String(contentsOf: url, encoding:.utf8) else {
-            return
-        }
-    
-        let jsonData = Data(jsonString.utf8)
-        guard let answer = try? decoder.decode(Response.self, from: jsonData) else {
-            return
-        }
-        print(answer)
-    }
-    
-    func getCoordinateFrom(address: String, completion: @escaping(_ coordinate: CLLocationCoordinate2D?, _ error: Error?) -> () ) {
-        CLGeocoder().geocodeAddressString(address) { completion($0?.first?.location?.coordinate, $1) }
-    }
 }
