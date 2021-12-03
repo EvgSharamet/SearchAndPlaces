@@ -18,7 +18,6 @@
 		856C8ED5273C0364008C2126 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856C8ED4273C0364008C2126 /* SearchViewController.swift */; };
 		856C8EDD273EB1A6008C2126 /* FullScreenCityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856C8EDC273EB1A6008C2126 /* FullScreenCityController.swift */; };
 		85D996782757BC8B00FAAFC4 /* WeatherCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D996772757BC8B00FAAFC4 /* WeatherCellView.swift */; };
-		85FEA4572741745C003BC211 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FEA4562741745C003BC211 /* MapController.swift */; };
 		85FEA45A27426E7C003BC211 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FEA45927426E7C003BC211 /* WeatherViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +34,6 @@
 		856C8ED4273C0364008C2126 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		856C8EDC273EB1A6008C2126 /* FullScreenCityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenCityController.swift; sourceTree = "<group>"; };
 		85D996772757BC8B00FAAFC4 /* WeatherCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCellView.swift; sourceTree = "<group>"; };
-		85FEA4562741745C003BC211 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		85FEA45927426E7C003BC211 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,7 +87,6 @@
 				856C8EB9273ABFAD008C2126 /* ViewController.swift */,
 				856C8ED4273C0364008C2126 /* SearchViewController.swift */,
 				856C8EDC273EB1A6008C2126 /* FullScreenCityController.swift */,
-				85FEA4562741745C003BC211 /* MapController.swift */,
 				85FEA45927426E7C003BC211 /* WeatherViewController.swift */,
 			);
 			path = Controller;
@@ -188,7 +185,6 @@
 			files = (
 				854CE7EF27597E1F00F0AA5C /* WeatherService.swift in Sources */,
 				856C8EBA273ABFAD008C2126 /* ViewController.swift in Sources */,
-				85FEA4572741745C003BC211 /* MapController.swift in Sources */,
 				85D996782757BC8B00FAAFC4 /* WeatherCellView.swift in Sources */,
 				856C8ED5273C0364008C2126 /* SearchViewController.swift in Sources */,
 				856C8EB6273ABFAD008C2126 /* AppDelegate.swift in Sources */,

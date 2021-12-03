@@ -17,6 +17,31 @@ class WeatherService {
         let info: String
     }
     
+    struct Response: Codable {
+        
+        struct Weather: Codable {
+            let id: Int
+            let main: String
+            let description: String
+            let icon: String
+        }
+            
+        struct Coord: Codable {
+            let lat: Double
+            let lon: Double
+        }
+        
+        struct Hourly: Codable {
+            let temp: Float
+            let icon: String
+            let weather: Weather
+        }
+        
+        let lat: Double
+        let lon: Double
+        let hourly: [Hourly]
+    }
+    
     struct WeatherInfo {
         var icon: String
         var description: String
@@ -33,6 +58,7 @@ class WeatherService {
     typealias RequestResultHandler = (RequestResult) -> Void
     
     //MARK: - data
+    
     static let shared = WeatherService()
     
     //MARK: - public functions

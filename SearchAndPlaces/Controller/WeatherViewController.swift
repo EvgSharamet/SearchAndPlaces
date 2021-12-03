@@ -10,38 +10,9 @@ import UIKit
 import SnapKit
 import CoreLocation
 
-struct Response: Codable {
-    
-    struct Weather: Codable {
-        let id: Int
-        let main: String
-        let description: String
-        let icon: String
-    }
-        
-    struct Coord: Codable {
-        let lat: Double
-        let lon: Double
-    }
-    
-    struct Hourly: Codable {
-        let temp: Float
-        let icon: String
-        let weather: Weather
-    }
-    
-    let lat: Double
-    let lon: Double
-    let hourly: [Hourly]
-}
+
 
 class WeatherViewController: UIViewController {
-    
-    enum Exception: Error {
-        case ServerError
-        case ParsingError
-        case JsonParsingError
-    }
     
     public var cityName: String?
     
