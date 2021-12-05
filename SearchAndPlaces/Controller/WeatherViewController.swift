@@ -63,5 +63,4 @@ class WeatherViewController: UIViewController {
             maker.width.equalTo(200)
         }
     }
-
 }

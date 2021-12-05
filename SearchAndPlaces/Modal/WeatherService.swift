@@ -94,6 +94,7 @@ class WeatherService {
         }
     
         let jsonData = Data(jsonString.utf8)
+        
         guard let answer = try? decoder.decode(Response.self, from: jsonData) else {
             return
         }

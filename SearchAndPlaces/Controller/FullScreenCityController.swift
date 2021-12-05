@@ -18,12 +18,13 @@ class FullScreenCityController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+      //  setupView()
         setupMap()
     }
         
     func setupMap() {
         let mapView = MKMapView()
+        self.mapView = mapView
         view.addSubview(mapView)
         mapView.delegate = self
         
@@ -39,7 +40,6 @@ class FullScreenCityController: UIViewController{
         mapView.centerToLocation(locat)
         }
     }
-    
 
     func setupView() {
         
