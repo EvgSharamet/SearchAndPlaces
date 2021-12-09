@@ -22,6 +22,9 @@ class WeatherCellView: UIView {
         
         self.layer.cornerRadius = 30
         self.backgroundColor = .darkGray
+        self.snp.makeConstraints { maker in
+            maker.width.equalTo(120)
+        }
      
         let temperatureLabel = UILabel()
         self.addSubview(temperatureLabel)
