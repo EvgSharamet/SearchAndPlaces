@@ -14,6 +14,7 @@ class WeatherCellView: UIView {
     var iconImageView: UIImageView?
     var destributionTimeStackView: UIStackView?
     var temperatureLabel: UILabel?
+    
 
     private var timeLabel: UILabel?
     private var descriptionLabel: UILabel?
@@ -21,15 +22,11 @@ class WeatherCellView: UIView {
     func prepare(inputData: WeatherService.WeatherInfo) {
         
         self.layer.cornerRadius = 30
-        self.backgroundColor = .darkGray
-        self.snp.makeConstraints { maker in
-            maker.width.equalTo(120)
-        }
-     
+        self.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         let temperatureLabel = UILabel()
         self.addSubview(temperatureLabel)
         self.temperatureLabel = temperatureLabel
-        temperatureLabel.text = String(inputData.temperature) + "°"
+        temperatureLabel.text = String(inputData.temp) + "°"
         temperatureLabel.textColor = .white
         temperatureLabel.snp.makeConstraints { maker in
             maker.top.equalToSuperview().inset(10)
@@ -58,19 +55,25 @@ class WeatherCellView: UIView {
         self.destributionTimeStackView?.snp.makeConstraints { maker in
             maker.bottom.equalToSuperview()
             maker.centerX.equalToSuperview()
-            maker.height.equalTo(self.snp.height).multipliedBy(0.5)
+            maker.height.equalTo(80)
+            maker.width.equalToSuperview()
         }
         
         let descriptionLabel = UILabel()
         destributionTimeStackView.addArrangedSubview(descriptionLabel)
+       
         descriptionLabel.text = inputData.description
         descriptionLabel.textColor = .white
         descriptionLabel.textAlignment = .center
-        
+        descriptionLabel.lineBreakMode = .byWordWrapping
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.font = descriptionLabel.font.withSize(16)
         let timeLabel = UILabel()
         destributionTimeStackView.addArrangedSubview(timeLabel)
         self.timeLabel = timeLabel
-        timeLabel.text = inputData.time
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH"
+        timeLabel.text = (dateFormatter.string(from: inputData.time)) + ":00"
         timeLabel.textColor = .white
         timeLabel.textAlignment = .center
     }

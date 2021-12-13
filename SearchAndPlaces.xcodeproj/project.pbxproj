@@ -17,9 +17,9 @@
 		856C8ED1273BFECE008C2126 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 856C8ED0273BFECE008C2126 /* SnapKit */; };
 		856C8ED5273C0364008C2126 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856C8ED4273C0364008C2126 /* SearchViewController.swift */; };
 		856C8EDD273EB1A6008C2126 /* FullScreenCityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856C8EDC273EB1A6008C2126 /* FullScreenCityController.swift */; };
-		85BCCFEC2760C1FD00FBAFB6 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BCCFEB2760C1FD00FBAFB6 /* test.swift */; };
+		85BCE5C3276664F6002A5AEB /* fullScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BCE5C2276664F6002A5AEB /* fullScreenView.swift */; };
+		85BCE5C52767A360002A5AEB /* mapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BCE5C42767A360002A5AEB /* mapService.swift */; };
 		85D996782757BC8B00FAAFC4 /* WeatherCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D996772757BC8B00FAAFC4 /* WeatherCellView.swift */; };
-		85FEA45A27426E7C003BC211 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FEA45927426E7C003BC211 /* WeatherViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,9 +34,9 @@
 		856C8ECC273BFDEF008C2126 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		856C8ED4273C0364008C2126 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		856C8EDC273EB1A6008C2126 /* FullScreenCityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenCityController.swift; sourceTree = "<group>"; };
-		85BCCFEB2760C1FD00FBAFB6 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
+		85BCE5C2276664F6002A5AEB /* fullScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fullScreenView.swift; sourceTree = "<group>"; };
+		85BCE5C42767A360002A5AEB /* mapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapService.swift; sourceTree = "<group>"; };
 		85D996772757BC8B00FAAFC4 /* WeatherCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCellView.swift; sourceTree = "<group>"; };
-		85FEA45927426E7C003BC211 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,8 +89,6 @@
 				856C8EB9273ABFAD008C2126 /* ViewController.swift */,
 				856C8ED4273C0364008C2126 /* SearchViewController.swift */,
 				856C8EDC273EB1A6008C2126 /* FullScreenCityController.swift */,
-				85FEA45927426E7C003BC211 /* WeatherViewController.swift */,
-				85BCCFEB2760C1FD00FBAFB6 /* test.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -99,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				85D996772757BC8B00FAAFC4 /* WeatherCellView.swift */,
+				85BCE5C2276664F6002A5AEB /* fullScreenView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -107,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				854CE7EE27597E1F00F0AA5C /* WeatherService.swift */,
+				85BCE5C42767A360002A5AEB /* mapService.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -186,14 +186,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85BCE5C52767A360002A5AEB /* mapService.swift in Sources */,
 				854CE7EF27597E1F00F0AA5C /* WeatherService.swift in Sources */,
 				856C8EBA273ABFAD008C2126 /* ViewController.swift in Sources */,
 				85D996782757BC8B00FAAFC4 /* WeatherCellView.swift in Sources */,
-				85BCCFEC2760C1FD00FBAFB6 /* test.swift in Sources */,
+				85BCE5C3276664F6002A5AEB /* fullScreenView.swift in Sources */,
 				856C8ED5273C0364008C2126 /* SearchViewController.swift in Sources */,
 				856C8EB6273ABFAD008C2126 /* AppDelegate.swift in Sources */,
 				856C8EDD273EB1A6008C2126 /* FullScreenCityController.swift in Sources */,
-				85FEA45A27426E7C003BC211 /* WeatherViewController.swift in Sources */,
 				856C8ECD273BFDEF008C2126 /* MainNavigationController.swift in Sources */,
 				856C8EB8273ABFAD008C2126 /* SceneDelegate.swift in Sources */,
 			);

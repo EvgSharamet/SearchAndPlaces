@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import UIKit
-import SnapKit
 import CoreLocation
 
 class WeatherService {
@@ -32,9 +30,9 @@ class WeatherService {
         }
         
         struct Hourly: Codable {
+            let dt: Int
             let temp: Float
-            let icon: String
-            let weather: Weather
+            let weather: [Weather]
         }
         
         let lat: Double
@@ -45,13 +43,13 @@ class WeatherService {
     struct WeatherInfo {
         var icon: String
         var description: String
-        var time: String
-        var temperature: Int
+        var time: Date
+        var temp: Int
     }
     
     struct WeatherData {
-        let now: WeatherInfo
-        let byHours: [Int: WeatherInfo]
+        let today: [WeatherInfo]
+        let tomorrow: [WeatherInfo]
     }
     
     typealias RequestResult = Result<WeatherData, Swift.Error>
@@ -64,7 +62,9 @@ class WeatherService {
     //MARK: - public functions
     
     func requestWeatherOf(place: String, handler: @escaping RequestResultHandler) {
+        print(place)
         getCoordinateFrom(address: place ) { (location, error) in
+            print(location ?? "ERROR")
             guard let location = location else {
                 handler(.failure(Error(info: "no location")))
                 return
@@ -88,22 +88,31 @@ class WeatherService {
         else {
             throw Error(info: "can't get url")
         }
-
+        
+        print(url)
         guard let jsonString = try? String(contentsOf: url, encoding:.utf8) else {
             throw Error(info: "can't decode url")
         }
-    
+        
         let jsonData = Data(jsonString.utf8)
         
         guard let answer = try? decoder.decode(Response.self, from: jsonData) else {
             throw Error(info: "can't decode Response")
         }
-        print("ANSWER ->\(answer)<-ANSWER_END")
         
-        let info = WeatherInfo(icon: answer.hourly.first?.icon ?? "", description: "", time: "", temperature: Int(answer.hourly.first?.temp ?? 30))
+        let rawDataToday = answer.hourly.dropLast(23)
+        let rawDataTomorrow = answer.hourly.dropFirst(24)
+        var weatherInfoToday:  [WeatherInfo] = []
+        var weatherInfoTomorrow: [WeatherInfo] = []
+
+        for item in rawDataToday {
+            weatherInfoToday.append(WeatherInfo(icon: item.weather.first?.icon ?? "01n", description: item.weather.first?.description ?? "missing", time: NSDate(timeIntervalSince1970: TimeInterval(item.dt)) as Date, temp: Int(item.temp)))
+        }
+        for item in rawDataTomorrow {
+            weatherInfoTomorrow.append(WeatherInfo(icon: item.weather.first?.icon ?? "01n", description: item.weather.first?.description ?? "missing", time: NSDate(timeIntervalSince1970: TimeInterval(item.dt)) as Date, temp: Int(item.temp)))
+        }
         
-        print("INFO ->\(answer)<-INFOEND")
-        return WeatherData(now: info , byHours: [:])
+        return WeatherData(today: weatherInfoToday, tomorrow: weatherInfoTomorrow )
     }
     
    private func getCoordinateFrom(address: String, completion: @escaping(_ coordinate: CLLocationCoordinate2D?, _ error: Swift.Error?) -> () ) {
@@ -112,4 +121,3 @@ class WeatherService {
     
     private init() {}
 }
-

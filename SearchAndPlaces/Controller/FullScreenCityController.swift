@@ -11,62 +11,52 @@ import SnapKit
 import CoreLocation
 import MapKit
 
-class FullScreenCityController: UIViewController{
-    
+class FullScreenCityController: UIViewController {
+
     public var cityName: String?
     private var mapView: MKMapView?
+    private var fullScreenStackView: UIStackView?
+    private var mainView: fullScreenView?
+    
+    typealias RequestResult = Result<WeatherService.WeatherData, Swift.Error>
+    var weatherTodayStackView: UIStackView?
+    var weatherTomorrowStackView: UIStackView?
+    
+    @frozen public enum Result<Success, Failure> where Failure : Error {
+        case success(Success)
+        case failure(Failure)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      //  setupView()
-        setupMap()
+        
+      //setupMap()
+        setupView()
     }
-        
-    func setupMap() {
-        let mapView = MKMapView()
-        self.mapView = mapView
-        view.addSubview(mapView)
-        mapView.delegate = self
-        
-        mapView.snp.makeConstraints { make in
-            make.height.equalToSuperview()
-            make.width.equalToSuperview()
-        }
-        guard let cityName = cityName else { return }
-        
-        getCoordinateFrom(address: cityName) { (locat, err) in
-            print (locat ?? "rtlr")
-            guard let locat = locat else { return }
-        mapView.centerToLocation(locat)
-        }
-    }
-
+    
     func setupView() {
         
-        let fullScreenStackView = UIStackView()
-        let cityNameLabel = UILabel()
-        fullScreenStackView.axis = .vertical
-        fullScreenStackView.backgroundColor = .blue
-        self.view.addSubview(fullScreenStackView)
-        fullScreenStackView.addSubview(cityNameLabel)
+        let mainView = fullScreenView()
+        self.mainView = mainView
+        view.addSubview(mainView)
+        mainView.prepare()
         
-        fullScreenStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        guard let cityName = cityName else {
+            return
         }
-        
-        cityNameLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
-            make.height.equalTo(20)
+     
+        WeatherService.shared.requestWeatherOf(place: cityName) { result in
+            switch result {
+                case .success(let weatherData):
+                self.mainView?.createWeatherCells(data:weatherData)
+                case .failure(let error):
+                    print(error)
+            }
         }
-        cityNameLabel.backgroundColor = .white
-        
-        guard let cityName = cityName else { return }
-        cityNameLabel.text = cityName
-        print(getCoordinateFrom(address: cityName, completion: { (coord, error) in
-            print(coord ?? "rtr")
-        }))
+     
     }
+        
+
     
     func getCoordinateFrom(address: String, completion: @escaping(_ coordinate: CLLocationCoordinate2D?, _ error: Error?) -> () ) {
         
