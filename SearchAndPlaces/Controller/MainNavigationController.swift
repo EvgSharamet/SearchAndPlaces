@@ -22,7 +22,5 @@ class MainNavigationController: UINavigationController {
         let fullImage = FullScreenCityController()
         fullImage.cityName = cityName
         pushViewController(fullImage, animated: true)
-    //  let testWindow = testController()
-     // pushViewController(testWindow, animated: false)
     }
 }

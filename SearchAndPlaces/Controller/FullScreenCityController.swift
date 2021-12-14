@@ -13,26 +13,23 @@ import MapKit
 
 class FullScreenCityController: UIViewController {
 
-    public var cityName: String?
-    private var mapView: MKMapView?
-    private var fullScreenStackView: UIStackView?
-    private var mainView: fullScreenView?
-    
-    typealias RequestResult = Result<WeatherService.WeatherData, Swift.Error>
-    var weatherTodayStackView: UIStackView?
-    var weatherTomorrowStackView: UIStackView?
-    
     @frozen public enum Result<Success, Failure> where Failure : Error {
         case success(Success)
         case failure(Failure)
     }
+    typealias RequestResult = Result<WeatherService.WeatherData, Swift.Error>
+    
+    public var cityName: String?
+    private var mapView: MKMapView?
+    private var fullScreenStackView: UIStackView?
+    private var mainView: fullScreenView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
     
-    func setupView() {
+    private func setupView() {
         let mainView = fullScreenView()
         self.mainView = mainView
         view.addSubview(mainView)
@@ -41,6 +38,8 @@ class FullScreenCityController: UIViewController {
         guard let cityName = cityName else {
             return
         }
+        
+        mainView.cityNameLabel?.text = cityName
         
         GeocodeService.shared.getCoordinate(cityName: cityName) { result in
             switch result {
@@ -73,5 +72,3 @@ private extension MKMapView {
     }
 }
 
-extension FullScreenCityController: MKMapViewDelegate {
-}

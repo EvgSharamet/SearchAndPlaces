@@ -11,11 +11,9 @@ import SnapKit
 
 class WeatherCellView: UIView {
     
-    var iconImageView: UIImageView?
-    var destributionTimeStackView: UIStackView?
-    var temperatureLabel: UILabel?
-    
-
+    private var iconImageView: UIImageView?
+    private var temperatureLabel: UILabel?
+    private var destributionTimeStackView: UIStackView?
     private var timeLabel: UILabel?
     private var descriptionLabel: UILabel?
     

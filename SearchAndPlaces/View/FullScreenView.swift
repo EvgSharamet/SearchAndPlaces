@@ -13,12 +13,12 @@ import MapKit
 class fullScreenView: UIView {
     
     var mapView: MKMapView?
+    var cityNameLabel: UILabel?
+ 
+    private var weatherTodayStackView: UIStackView?
+    private var weatherTomorrowStackView: UIStackView?
     private var fullScreenStackView: UIStackView?
-    var weatherTodayStackView: UIStackView?
-    var weatherTomorrowStackView: UIStackView?
-    let cityName = "Москва"
-    
-    lazy var gradient: CAGradientLayer = {
+    lazy private var gradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
         gradient.type = .axial
         gradient.colors = [
@@ -38,8 +38,7 @@ class fullScreenView: UIView {
         setupMainStackView()
     }
     
-    func  setupView() {
-        
+    private func  setupView() {
         self.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -53,7 +52,36 @@ class fullScreenView: UIView {
         gradient.frame = bounds
     }
     
-    func setupMap() {
+    func createWeatherCells(data: WeatherService.WeatherData) {
+        guard let weatherTodayStackView = weatherTodayStackView else {
+            return
+        }
+        guard let weatherTomorrowStackView = weatherTomorrowStackView else {
+            return
+        }
+        
+        for item in data.today {
+            let cell = WeatherCellView()
+            cell.prepare(inputData: item)
+            weatherTodayStackView.addArrangedSubview(cell)
+            cell.snp.makeConstraints { maker in
+                maker.height.equalTo(160)
+                maker.width.equalTo(120)
+            }
+        }
+
+        for item in data.tomorrow {
+            let cell = WeatherCellView()
+            cell.prepare(inputData: item)
+            weatherTomorrowStackView.addArrangedSubview(cell)
+            cell.snp.makeConstraints { maker in
+                maker.height.equalTo(160)
+                maker.width.equalTo(120)
+            }
+        }
+    }
+    
+    private func setupMap() {
         let mapView = MKMapView()
         self.mapView = mapView
         self.addSubview(mapView)
@@ -65,8 +93,7 @@ class fullScreenView: UIView {
         }
     }
     
-    func setupMainStackView() {
-         
+    private func setupMainStackView() {
         guard let mapView = self.mapView else {
             return
         }
@@ -84,10 +111,10 @@ class fullScreenView: UIView {
         }
 
         let cityNameLabel = UILabel()
+        self.cityNameLabel = cityNameLabel
         fullScreenStackView.addArrangedSubview(cityNameLabel)
         cityNameLabel.font = UIFont.boldSystemFont(ofSize: 45)
         cityNameLabel.textColor = .white
-        cityNameLabel.text = self.cityName
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
@@ -132,38 +159,6 @@ class fullScreenView: UIView {
         weatherTomorrowStackView.spacing = 15
         weatherTomorrowStackView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
-        }
-
-    }
-    
-    func createWeatherCells(data: WeatherService.WeatherData) {
-        
-        guard let weatherTodayStackView = weatherTodayStackView else {
-            return
-        }
-        
-        guard let weatherTomorrowStackView = weatherTomorrowStackView else {
-            return
-        }
-        
-        for item in data.today {
-            let cell = WeatherCellView()
-            cell.prepare(inputData: item)
-            weatherTodayStackView.addArrangedSubview(cell)
-            cell.snp.makeConstraints { maker in
-                maker.height.equalTo(160)
-                maker.width.equalTo(120)
-            }
-        }
-
-        for item in data.tomorrow {
-            let cell = WeatherCellView()
-            cell.prepare(inputData: item)
-            weatherTomorrowStackView.addArrangedSubview(cell)
-            cell.snp.makeConstraints { maker in
-                maker.height.equalTo(160)
-                maker.width.equalTo(120)
-            }
         }
     }
 }
