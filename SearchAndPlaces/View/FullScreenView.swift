@@ -12,7 +12,7 @@ import MapKit
 
 class fullScreenView: UIView {
     
-    private var mapView: MKMapView?
+    var mapView: MKMapView?
     private var fullScreenStackView: UIStackView?
     var weatherTodayStackView: UIStackView?
     var weatherTomorrowStackView: UIStackView?
@@ -32,7 +32,6 @@ class fullScreenView: UIView {
         return gradient
     }()
 
-    
     func prepare() {
         setupView()
         setupMap()

@@ -14,8 +14,8 @@ class GeocodeService {
     }
     
     struct Coordinate2D {
-        let latitude: Float
-        let longitude: Float
+        let latitude: Double
+        let longitude: Double
     }
     static let shared = GeocodeService()
     typealias RequestResult = Result<Coordinate2D, Swift.Error>
@@ -29,7 +29,7 @@ class GeocodeService {
                 handler(.failure(err))
                 return
             }
-            let result = Coordinate2D(latitude: Float(location.coordinate.latitude), longitude: Float(location.coordinate.longitude))
+            let result = Coordinate2D(latitude: Double(location.coordinate.latitude), longitude: Double(location.coordinate.longitude))
             handler(.success(result))
         }
     }

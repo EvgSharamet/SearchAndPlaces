@@ -29,13 +29,10 @@ class FullScreenCityController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-      //setupMap()
         setupView()
     }
     
     func setupView() {
-        
         let mainView = fullScreenView()
         self.mainView = mainView
         view.addSubview(mainView)
@@ -44,11 +41,20 @@ class FullScreenCityController: UIViewController {
         guard let cityName = cityName else {
             return
         }
+        
+        GeocodeService.shared.getCoordinate(cityName: cityName) { result in
+            switch result {
+                case .success(let location):
+                    mainView.mapView?.centerToLocation(location)
+            case .failure(let error):
+                print(error)
+            }
+        }
      
         WeatherService.shared.requestWeatherOf(place: cityName) { result in
             switch result {
                 case .success(let weatherData):
-                self.mainView?.createWeatherCells(data:weatherData)
+                    self.mainView?.createWeatherCells(data:weatherData)
                 case .failure(let error):
                     print(error)
             }
@@ -58,10 +64,9 @@ class FullScreenCityController: UIViewController {
 
 private extension MKMapView {
     
-    func centerToLocation(_ location: CLLocationCoordinate2D, regionRadius: CLLocationDistance = 1000) {
-        
+    func centerToLocation(_ location: GeocodeService.Coordinate2D, regionRadius: CLLocationDistance = 1000) {
         let coordinateRegion = MKCoordinateRegion(
-        center: location,
+            center: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude ),
         latitudinalMeters: regionRadius,
         longitudinalMeters: regionRadius)
       setRegion(coordinateRegion, animated: true)
@@ -69,5 +74,4 @@ private extension MKMapView {
 }
 
 extension FullScreenCityController: MKMapViewDelegate {
-    
 }
