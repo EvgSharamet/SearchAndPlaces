@@ -53,7 +53,6 @@ class FullScreenCityController: UIViewController {
                     print(error)
             }
         }
-     
     }
         
 

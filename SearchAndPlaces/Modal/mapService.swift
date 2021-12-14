@@ -12,7 +12,7 @@ class mapService {
     
     
     
-  /*  func getCoordinate {
+    /*  func getCoordinate {
         let mapView = MKMapView()
         self.mapView = mapView
         view.addSubview(mapView)

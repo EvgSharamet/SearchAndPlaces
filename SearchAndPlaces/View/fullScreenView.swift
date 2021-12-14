@@ -23,7 +23,7 @@ class fullScreenView: UIView {
         gradient.type = .axial
         gradient.colors = [
             UIColor.black.withAlphaComponent(0.96).cgColor,
-            UIColor.darkGray.withAlphaComponent(0.5).cgColor,
+            UIColor.darkGray.withAlphaComponent(0.02).cgColor,
             UIColor.black.withAlphaComponent(0.96).cgColor
         ]
         gradient.startPoint = CGPoint(x: 0, y: 0)
@@ -44,7 +44,7 @@ class fullScreenView: UIView {
         self.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        self.backgroundColor = .white
+        self.backgroundColor = .lightGray
         gradient.frame = bounds
         layer.addSublayer(gradient)
     }
@@ -74,7 +74,7 @@ class fullScreenView: UIView {
         
         let fullScreenStackView = UIStackView()
         fullScreenStackView.axis = .vertical
-        fullScreenStackView.spacing = 10
+        fullScreenStackView.spacing = 15
         self.addSubview(fullScreenStackView)
         fullScreenStackView.alignment = .leading
         fullScreenStackView.snp.makeConstraints { make in
@@ -86,7 +86,8 @@ class fullScreenView: UIView {
 
         let cityNameLabel = UILabel()
         fullScreenStackView.addArrangedSubview(cityNameLabel)
-        cityNameLabel.font = UIFont.boldSystemFont(ofSize: 40)
+        cityNameLabel.font = UIFont.boldSystemFont(ofSize: 45)
+        cityNameLabel.textColor = .white
         cityNameLabel.text = self.cityName
 
         let dateFormatter = DateFormatter()
@@ -108,7 +109,7 @@ class fullScreenView: UIView {
         let weatherTodayStackView = UIStackView()
         self.weatherTodayStackView = weatherTodayStackView
         scrollViewToday.addSubview(weatherTodayStackView)
-        weatherTodayStackView.spacing = 20
+        weatherTodayStackView.spacing = 15
         weatherTodayStackView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
@@ -116,11 +117,8 @@ class fullScreenView: UIView {
         let tomorrowDateLabel = UILabel()
         fullScreenStackView.addArrangedSubview(tomorrowDateLabel)
         tomorrowDateLabel.text = "Завтра," + dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: 1, to: Date())!)
-
         tomorrowDateLabel.textColor = .white
         tomorrowDateLabel.textAlignment = .center
-
-
 
         let scrollViewTomorrow = UIScrollView()
         fullScreenStackView.addArrangedSubview(scrollViewTomorrow)
@@ -129,18 +127,14 @@ class fullScreenView: UIView {
             maker.width.equalToSuperview()
         }
 
-    //    scrollViewTomorrow.backgroundColor = .brown
-
         let weatherTomorrowStackView = UIStackView()
         self.weatherTomorrowStackView = weatherTomorrowStackView
         scrollViewTomorrow.addSubview(weatherTomorrowStackView)
-
+        weatherTomorrowStackView.spacing = 15
         weatherTomorrowStackView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
 
-        weatherTomorrowStackView.spacing = 20
-     //   weatherTomorrowStackView.backgroundColor = .white
     }
     
     func createWeatherCells(data: WeatherService.WeatherData) {
