@@ -16,7 +16,6 @@ class WeatherService {
     }
     
     struct Response: Codable {
-        
         struct Weather: Codable {
             let id: Int
             let main: String
@@ -62,7 +61,6 @@ class WeatherService {
     //MARK: - public functions
     
     func requestWeatherOf(place: String, handler: @escaping RequestResultHandler) {
-        print(place)
         getCoordinateFrom(address: place ) { (location, error) in
             print(location ?? "ERROR")
             guard let location = location else {
@@ -82,14 +80,12 @@ class WeatherService {
     //MARK: - private functions
     
     private func jsonToResponse(_ location:CLLocationCoordinate2D ) throws -> WeatherData {
-        
         let decoder = JSONDecoder()
         guard let url = URL( string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(location.latitude)&lon=\(location.longitude)&lang=ru&exclude=minutely,daily&units=metric&appid=167ec7c4487c8b004df1c9b138fb6600")
         else {
             throw Error(info: "can't get url")
         }
         
-        print(url)
         guard let jsonString = try? String(contentsOf: url, encoding:.utf8) else {
             throw Error(info: "can't decode url")
         }
@@ -108,6 +104,7 @@ class WeatherService {
         for item in rawDataToday {
             weatherInfoToday.append(WeatherInfo(icon: item.weather.first?.icon ?? "01n", description: item.weather.first?.description ?? "missing", time: NSDate(timeIntervalSince1970: TimeInterval(item.dt)) as Date, temp: Int(item.temp)))
         }
+        
         for item in rawDataTomorrow {
             weatherInfoTomorrow.append(WeatherInfo(icon: item.weather.first?.icon ?? "01n", description: item.weather.first?.description ?? "missing", time: NSDate(timeIntervalSince1970: TimeInterval(item.dt)) as Date, temp: Int(item.temp)))
         }

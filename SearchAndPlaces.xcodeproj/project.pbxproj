@@ -10,7 +10,6 @@
 		854CE7EF27597E1F00F0AA5C /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854CE7EE27597E1F00F0AA5C /* WeatherService.swift */; };
 		856C8EB6273ABFAD008C2126 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856C8EB5273ABFAD008C2126 /* AppDelegate.swift */; };
 		856C8EB8273ABFAD008C2126 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856C8EB7273ABFAD008C2126 /* SceneDelegate.swift */; };
-		856C8EBA273ABFAD008C2126 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856C8EB9273ABFAD008C2126 /* ViewController.swift */; };
 		856C8EBF273ABFB5008C2126 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 856C8EBE273ABFB5008C2126 /* Assets.xcassets */; };
 		856C8EC2273ABFB5008C2126 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 856C8EC0273ABFB5008C2126 /* LaunchScreen.storyboard */; };
 		856C8ECD273BFDEF008C2126 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856C8ECC273BFDEF008C2126 /* MainNavigationController.swift */; };
@@ -27,7 +26,6 @@
 		856C8EB2273ABFAD008C2126 /* SearchAndPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchAndPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		856C8EB5273ABFAD008C2126 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		856C8EB7273ABFAD008C2126 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		856C8EB9273ABFAD008C2126 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		856C8EBE273ABFB5008C2126 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		856C8EC1273ABFB5008C2126 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		856C8EC3273ABFB5008C2126 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -86,7 +84,6 @@
 			isa = PBXGroup;
 			children = (
 				856C8ECC273BFDEF008C2126 /* MainNavigationController.swift */,
-				856C8EB9273ABFAD008C2126 /* ViewController.swift */,
 				856C8ED4273C0364008C2126 /* SearchViewController.swift */,
 				856C8EDC273EB1A6008C2126 /* FullScreenCityController.swift */,
 			);
@@ -188,7 +185,6 @@
 			files = (
 				85BCE5C52767A360002A5AEB /* GeocodeService.swift in Sources */,
 				854CE7EF27597E1F00F0AA5C /* WeatherService.swift in Sources */,
-				856C8EBA273ABFAD008C2126 /* ViewController.swift in Sources */,
 				85D996782757BC8B00FAAFC4 /* WeatherCellView.swift in Sources */,
 				85BCE5C3276664F6002A5AEB /* FullScreenView.swift in Sources */,
 				856C8ED5273C0364008C2126 /* SearchViewController.swift in Sources */,

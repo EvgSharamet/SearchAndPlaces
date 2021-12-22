@@ -9,6 +9,7 @@ import Foundation
 import MapKit
 
 class GeocodeService {
+    
     struct Error: Swift.Error {
         let info: String
     }
@@ -22,7 +23,6 @@ class GeocodeService {
     typealias RequestResultHandler = (RequestResult) -> Void
     
     func getCoordinate(cityName: String, handler: @escaping RequestResultHandler)  {
-        
         CLGeocoder().geocodeAddressString(cityName) { placemark, error in
             guard let location = placemark?.first?.location else {
                 let err = error ?? Error(info: "No location \(cityName)")

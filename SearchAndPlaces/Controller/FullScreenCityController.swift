@@ -38,7 +38,6 @@ class FullScreenCityController: UIViewController {
         guard let cityName = cityName else {
             return
         }
-        
         mainView.cityNameLabel?.text = cityName
         
         GeocodeService.shared.getCoordinate(cityName: cityName) { result in

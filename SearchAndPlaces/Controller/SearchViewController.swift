@@ -14,10 +14,10 @@ class SearchViewController: UITableViewController {
     public var onItemSelectedDelegate : ((String) -> Void)?
     var Cities = [ "Алушта", "Феодосия", "Ялта", "Севастополь", "Симферополь", "Абакан","Адлер", "Анапа", "Ангарск","Архангельск","Астрахань","Барнаул",
         "Белгород","Благовещенск","Чебоксары","Челябинск","Череповец", "Черняховск","Чита","Екатеринбург","Геленджик","Иркутск","Ижевск","Кабардинка","Калининград","Казань","Кемерово","Хабаровск","Ханты-Мансийск","Кисловодск","Кострома","Москва","Новосибирск", "Кипр"]
-    
     public var filteredCities: [String] = []
-    let searchController = UISearchController(searchResultsController: nil)
-    var mainView: UIView?
+    
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var mainView: UIView?
     private let identifier = "TableViewCell"
     
     override func viewDidLoad() {
@@ -55,7 +55,6 @@ class SearchViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         cell.textLabel?.text = self.filteredCities[indexPath.row]
-    
         return cell
     }
     
@@ -66,7 +65,9 @@ class SearchViewController: UITableViewController {
 
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        if ((searchController.searchBar.text!.isEmpty)) { return }
+        if ((searchController.searchBar.text!.isEmpty)) {
+            return
+        }
         filterContentForSearchText(searchController.searchBar.text!)
     }
     
@@ -79,7 +80,7 @@ extension SearchViewController: UISearchResultsUpdating {
 }
 
 class TableViewCell: UITableViewCell {
-
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         self.accessoryType = .none
