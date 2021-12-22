@@ -11,36 +11,23 @@ import SnapKit
 
 class SearchViewController: UITableViewController {
     
-    public var onItemSelectedDelegate : ((String) -> Void)?
+    //MARK: - data
+    
+    var onItemSelectedDelegate : ((String) -> Void)?
     var Cities = [ "Алушта", "Феодосия", "Ялта", "Севастополь", "Симферополь", "Абакан","Адлер", "Анапа", "Ангарск","Архангельск","Астрахань","Барнаул",
         "Белгород","Благовещенск","Чебоксары","Челябинск","Череповец", "Черняховск","Чита","Екатеринбург","Геленджик","Иркутск","Ижевск","Кабардинка","Калининград","Казань","Кемерово","Хабаровск","Ханты-Мансийск","Кисловодск","Кострома","Москва","Новосибирск", "Кипр"]
-    public var filteredCities: [String] = []
+    var filteredCities: [String] = []
     
     private let searchController = UISearchController(searchResultsController: nil)
     private var mainView: UIView?
     private let identifier = "TableViewCell"
     
+    //MARK: - internal functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         setupSearchView()
-    }
-    
-    private func setupTableView() {
-        self.tableView.register(TableViewCell.self, forCellReuseIdentifier: identifier)
-    }
-    
-    private func setupSearchView() {
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Cities"
-        definesPresentationContext = true
-        searchController.searchBar.sizeToFit()
-        view.addSubview(searchController.searchBar)
-        navigationItem.title  = "Weather"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.tableView.tableHeaderView = searchController.searchBar
-        self.tableView.backgroundColor = .systemGroupedBackground
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,6 +48,25 @@ class SearchViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         onItemSelectedDelegate?(filteredCities[indexPath.row])
     }
+    
+    //MARK: - private functions
+    
+    private func setupTableView() {
+        self.tableView.register(TableViewCell.self, forCellReuseIdentifier: identifier)
+    }
+    
+    private func setupSearchView() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Cities"
+        definesPresentationContext = true
+        searchController.searchBar.sizeToFit()
+        view.addSubview(searchController.searchBar)
+        navigationItem.title  = "Weather"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.tableView.tableHeaderView = searchController.searchBar
+        self.tableView.backgroundColor = .systemGroupedBackground
+    }
 }
 
 extension SearchViewController: UISearchResultsUpdating {
@@ -79,7 +85,7 @@ extension SearchViewController: UISearchResultsUpdating {
     }
 }
 
-class TableViewCell: UITableViewCell {
+private class TableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()

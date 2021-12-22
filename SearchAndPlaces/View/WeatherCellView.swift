@@ -11,14 +11,17 @@ import SnapKit
 
 class WeatherCellView: UIView {
     
+    //MARK: - data
+    
     private var iconImageView: UIImageView?
     private var temperatureLabel: UILabel?
     private var destributionTimeStackView: UIStackView?
     private var timeLabel: UILabel?
     private var descriptionLabel: UILabel?
     
+    //MARK: - internal functions
+    
     func prepare(inputData: WeatherService.WeatherInfo) {
-        
         self.layer.cornerRadius = 30
         self.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         let temperatureLabel = UILabel()

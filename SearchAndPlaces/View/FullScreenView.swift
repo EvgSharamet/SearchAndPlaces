@@ -12,6 +12,8 @@ import MapKit
 
 class fullScreenView: UIView {
     
+    //MARK: - data
+    
     var mapView: MKMapView?
     var cityNameLabel: UILabel?
  
@@ -32,19 +34,12 @@ class fullScreenView: UIView {
         return gradient
     }()
 
+    //MARK: - internal functions
+    
     func prepare() {
         setupView()
         setupMap()
         setupMainStackView()
-    }
-    
-    private func  setupView() {
-        self.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        self.backgroundColor = .lightGray
-        gradient.frame = bounds
-        layer.addSublayer(gradient)
     }
     
     override func layoutSubviews() {
@@ -79,6 +74,17 @@ class fullScreenView: UIView {
                 maker.width.equalTo(120)
             }
         }
+    }
+    
+    //MARK: - private functions
+    
+    private func  setupView() {
+        self.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        self.backgroundColor = .lightGray
+        gradient.frame = bounds
+        layer.addSublayer(gradient)
     }
     
     private func setupMap() {

@@ -9,18 +9,24 @@ import Foundation
 import MapKit
 
 class GeocodeService {
+    //MARK: - types
     
     struct Error: Swift.Error {
         let info: String
     }
-    
+
     struct Coordinate2D {
         let latitude: Double
         let longitude: Double
     }
-    static let shared = GeocodeService()
     typealias RequestResult = Result<Coordinate2D, Swift.Error>
     typealias RequestResultHandler = (RequestResult) -> Void
+    
+    //MARK: - data
+
+    static let shared = GeocodeService()
+  
+    //MARK: - internal functions
     
     func getCoordinate(cityName: String, handler: @escaping RequestResultHandler)  {
         CLGeocoder().geocodeAddressString(cityName) { placemark, error in

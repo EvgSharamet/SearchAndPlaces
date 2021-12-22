@@ -13,21 +13,30 @@ import MapKit
 
 class FullScreenCityController: UIViewController {
 
+    //MARK: - types
+    
     @frozen public enum Result<Success, Failure> where Failure : Error {
         case success(Success)
         case failure(Failure)
     }
     typealias RequestResult = Result<WeatherService.WeatherData, Swift.Error>
     
-    public var cityName: String?
+    //MARK: - data
+    
+    var cityName: String?
+    
     private var mapView: MKMapView?
     private var fullScreenStackView: UIStackView?
     private var mainView: fullScreenView?
+    
+    //MARK: - internal functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
+    
+    //MARK: - private functions
     
     private func setupView() {
         let mainView = fullScreenView()

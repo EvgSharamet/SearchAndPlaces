@@ -58,7 +58,7 @@ class WeatherService {
     
     static let shared = WeatherService()
     
-    //MARK: - public functions
+    //MARK: - internal functions
     
     func requestWeatherOf(place: String, handler: @escaping RequestResultHandler) {
         getCoordinateFrom(address: place ) { (location, error) in

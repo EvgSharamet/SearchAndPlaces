@@ -11,12 +11,16 @@ import SnapKit
 
 class MainNavigationController: UINavigationController {
     
+    //MARK: - internal functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let searchScreen = SearchViewController()
         searchScreen.onItemSelectedDelegate = onItemSelected
         pushViewController(searchScreen, animated: true)
     }
+    
+    //MARK: - private functions
     
     private func onItemSelected(cityName: String) {
         let fullImage = FullScreenCityController()
