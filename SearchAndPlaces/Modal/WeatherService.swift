@@ -33,7 +33,7 @@ class WeatherService {
             let temp: Float
             let weather: [Weather]
         }
-        
+
         let lat: Double
         let lon: Double
         let hourly: [Hourly]
@@ -47,9 +47,11 @@ class WeatherService {
     }
     
     struct WeatherData {
+        let coord: Response.Coord
         let today: [WeatherInfo]
         let tomorrow: [WeatherInfo]
     }
+    
     
     typealias RequestResult = Result<WeatherData, Swift.Error>
     typealias RequestResultHandler = (RequestResult) -> Void
@@ -109,11 +111,7 @@ class WeatherService {
             weatherInfoTomorrow.append(WeatherInfo(icon: item.weather.first?.icon ?? "01n", description: item.weather.first?.description ?? "missing", time: NSDate(timeIntervalSince1970: TimeInterval(item.dt)) as Date, temp: Int(item.temp)))
         }
         
-        return WeatherData(today: weatherInfoToday, tomorrow: weatherInfoTomorrow )
-    }
-    
-   private func getCoordinateFrom(address: String, completion: @escaping(_ coordinate: CLLocationCoordinate2D?, _ error: Swift.Error?) -> () ) {
-        CLGeocoder().geocodeAddressString(address) { completion($0?.first?.location?.coordinate, $1) }
+        return WeatherData(coord: WeatherService.Response.Coord(lat: answer.lat,lon: answer.lon), today: weatherInfoToday, tomorrow: weatherInfoTomorrow )
     }
     
     private init() {}

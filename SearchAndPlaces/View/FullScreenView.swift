@@ -20,19 +20,6 @@ class fullScreenView: UIView {
     private var weatherTodayStackView: UIStackView?
     private var weatherTomorrowStackView: UIStackView?
     private var fullScreenStackView: UIStackView?
-    lazy private var gradient: CAGradientLayer = {
-        let gradient = CAGradientLayer()
-        gradient.type = .axial
-        gradient.colors = [
-            UIColor.black.withAlphaComponent(0.96).cgColor,
-            UIColor.darkGray.withAlphaComponent(0.02).cgColor,
-            UIColor.black.withAlphaComponent(0.96).cgColor
-        ]
-        gradient.startPoint = CGPoint(x: 0, y: 0)
-        gradient.endPoint = CGPoint(x: 1, y: 1)
-
-        return gradient
-    }()
 
     //MARK: - internal functions
     
@@ -41,12 +28,7 @@ class fullScreenView: UIView {
         setupMap()
         setupMainStackView()
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        gradient.frame = bounds
-    }
-    
+
     func createWeatherCells(data: WeatherService.WeatherData) {
         guard let weatherTodayStackView = weatherTodayStackView else {
             return
@@ -83,8 +65,10 @@ class fullScreenView: UIView {
             make.edges.equalToSuperview()
         }
         self.backgroundColor = .lightGray
-        gradient.frame = bounds
-        layer.addSublayer(gradient)
+        let gradient = GradientView()
+        self.addSubview(gradient)
+        gradient.prepare()
+        print(gradient.frame)
     }
     
     private func setupMap() {

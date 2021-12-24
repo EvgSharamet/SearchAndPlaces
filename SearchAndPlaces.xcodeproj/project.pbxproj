@@ -16,8 +16,8 @@
 		856C8ED5273C0364008C2126 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856C8ED4273C0364008C2126 /* SearchViewController.swift */; };
 		856C8EDD273EB1A6008C2126 /* FullScreenCityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856C8EDC273EB1A6008C2126 /* FullScreenCityController.swift */; };
 		8593CBE92776028D008FC75B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8593CBE82776028D008FC75B /* AppDelegate.swift */; };
+		8593CBEB2776146F008FC75B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8593CBEA2776146F008FC75B /* GradientView.swift */; };
 		85BCE5C3276664F6002A5AEB /* FullScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BCE5C2276664F6002A5AEB /* FullScreenView.swift */; };
-		85BCE5C52767A360002A5AEB /* GeocodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BCE5C42767A360002A5AEB /* GeocodeService.swift */; };
 		85D996782757BC8B00FAAFC4 /* WeatherCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D996772757BC8B00FAAFC4 /* WeatherCellView.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,8 +32,8 @@
 		856C8ED4273C0364008C2126 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		856C8EDC273EB1A6008C2126 /* FullScreenCityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenCityController.swift; sourceTree = "<group>"; };
 		8593CBE82776028D008FC75B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8593CBEA2776146F008FC75B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		85BCE5C2276664F6002A5AEB /* FullScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenView.swift; sourceTree = "<group>"; };
-		85BCE5C42767A360002A5AEB /* GeocodeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodeService.swift; sourceTree = "<group>"; };
 		85D996772757BC8B00FAAFC4 /* WeatherCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				85D996772757BC8B00FAAFC4 /* WeatherCellView.swift */,
+				8593CBEA2776146F008FC75B /* GradientView.swift */,
 				85BCE5C2276664F6002A5AEB /* FullScreenView.swift */,
 			);
 			path = View;
@@ -103,7 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				854CE7EE27597E1F00F0AA5C /* WeatherService.swift */,
-				85BCE5C42767A360002A5AEB /* GeocodeService.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -183,8 +183,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85BCE5C52767A360002A5AEB /* GeocodeService.swift in Sources */,
 				854CE7EF27597E1F00F0AA5C /* WeatherService.swift in Sources */,
+				8593CBEB2776146F008FC75B /* GradientView.swift in Sources */,
 				85D996782757BC8B00FAAFC4 /* WeatherCellView.swift in Sources */,
 				8593CBE92776028D008FC75B /* AppDelegate.swift in Sources */,
 				85BCE5C3276664F6002A5AEB /* FullScreenView.swift in Sources */,
