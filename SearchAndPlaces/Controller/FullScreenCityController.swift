@@ -15,10 +15,6 @@ class FullScreenCityController: UIViewController {
 
     //MARK: - types
     
-    @frozen public enum Result<Success, Failure> where Failure : Error {
-        case success(Success)
-        case failure(Failure)
-    }
     typealias RequestResult = Result<WeatherService.WeatherData, Swift.Error>
     
     //MARK: - data
@@ -37,7 +33,7 @@ class FullScreenCityController: UIViewController {
     }
     
     //MARK: - private functions
-    
+
     private func setupView() {
         let mainView = fullScreenView()
         self.mainView = mainView
@@ -53,23 +49,29 @@ class FullScreenCityController: UIViewController {
             switch result {
                 case .success(let location):
                     mainView.mapView?.centerToLocation(location)
-            case .failure(let error):
-                print(error)
+            case .failure(_):
+                let alert = UIAlertController(title: "Warning", message: "This city wasn't found", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         }
-     
+        
         WeatherService.shared.requestWeatherOf(place: cityName) { result in
             switch result {
                 case .success(let weatherData):
                     self.mainView?.createWeatherCells(data:weatherData)
-                case .failure(let error):
-                    print(error)
+                case .failure(_):
+                let alert = UIAlertController(title: "Warning", message: "Weather data didn't load", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
 }
 
 private extension MKMapView {
+    
+    //MARK: - internal functions
     
     func centerToLocation(_ location: GeocodeService.Coordinate2D, regionRadius: CLLocationDistance = 1000) {
         let coordinateRegion = MKCoordinateRegion(

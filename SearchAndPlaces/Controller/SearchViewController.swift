@@ -16,17 +16,17 @@ class SearchViewController: UITableViewController {
     var onItemSelectedDelegate : ((String) -> Void)?
     var Cities = [ "Алушта", "Феодосия", "Ялта", "Севастополь", "Симферополь", "Абакан","Адлер", "Анапа", "Ангарск","Архангельск","Астрахань","Барнаул",
         "Белгород","Благовещенск","Чебоксары","Челябинск","Череповец", "Черняховск","Чита","Екатеринбург","Геленджик","Иркутск","Ижевск","Кабардинка","Калининград","Казань","Кемерово","Хабаровск","Ханты-Мансийск","Кисловодск","Кострома","Москва","Новосибирск", "Кипр"]
-    var filteredCities: [String] = []
+    public var filteredCities: [String] = []
     
-    private let searchController = UISearchController(searchResultsController: nil)
-    private var mainView: UIView?
-    private let identifier = "TableViewCell"
+    let searchController = UISearchController(searchResultsController: nil)
+    var mainView: UIView?
+    let identifier = "TableViewCell"
     
     //MARK: - internal functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
         setupSearchView()
     }
     
@@ -40,7 +40,7 @@ class SearchViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath)
         cell.textLabel?.text = self.filteredCities[indexPath.row]
         return cell
     }
@@ -51,11 +51,7 @@ class SearchViewController: UITableViewController {
     
     //MARK: - private functions
     
-    private func setupTableView() {
-        self.tableView.register(TableViewCell.self, forCellReuseIdentifier: identifier)
-    }
-    
-    private func setupSearchView() {
+    func setupSearchView() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Cities"
@@ -70,6 +66,9 @@ class SearchViewController: UITableViewController {
 }
 
 extension SearchViewController: UISearchResultsUpdating {
+    
+    //MARK: - internal functions
+    
     func updateSearchResults(for searchController: UISearchController) {
         if ((searchController.searchBar.text!.isEmpty)) {
             return
@@ -85,10 +84,3 @@ extension SearchViewController: UISearchResultsUpdating {
     }
 }
 
-private class TableViewCell: UITableViewCell {
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        self.accessoryType = .none
-    }
-}

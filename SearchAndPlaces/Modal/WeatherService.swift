@@ -61,19 +61,19 @@ class WeatherService {
     //MARK: - internal functions
     
     func requestWeatherOf(place: String, handler: @escaping RequestResultHandler) {
-        getCoordinateFrom(address: place ) { (location, error) in
-            print(location ?? "ERROR")
-            guard let location = location else {
-                handler(.failure(Error(info: "no location")))
+
+        CLGeocoder().geocodeAddressString(place) { placemark, error in
+            guard let location = placemark?.first?.location?.coordinate else {
+                let err = error ?? Error(info: "no location \(place)")
+                handler(.failure(err))
                 return
             }
             do {
                 let weatherData = try self.jsonToResponse(location)
                 handler(.success(weatherData))
             } catch {
-                handler(.failure(error as! WeatherService.Error))
+                handler(.failure(error))
             }
-            print(WeatherData.self)
         }
     }
     
