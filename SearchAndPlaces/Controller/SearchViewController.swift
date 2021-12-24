@@ -16,11 +16,11 @@ class SearchViewController: UITableViewController {
     var onItemSelectedDelegate : ((String) -> Void)?
     var Cities = [ "Алушта", "Феодосия", "Ялта", "Севастополь", "Симферополь", "Абакан","Адлер", "Анапа", "Ангарск","Архангельск","Астрахань","Барнаул",
         "Белгород","Благовещенск","Чебоксары","Челябинск","Череповец", "Черняховск","Чита","Екатеринбург","Геленджик","Иркутск","Ижевск","Кабардинка","Калининград","Казань","Кемерово","Хабаровск","Ханты-Мансийск","Кисловодск","Кострома","Москва","Новосибирск", "Кипр"]
-    public var filteredCities: [String] = []
+    var filteredCities: [String] = []
     
-    let searchController = UISearchController(searchResultsController: nil)
-    var mainView: UIView?
-    let identifier = "TableViewCell"
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var mainView: UIView?
+    private let identifier = "TableViewCell"
     
     //MARK: - internal functions
     
