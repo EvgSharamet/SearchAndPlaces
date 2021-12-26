@@ -10,15 +10,7 @@ import UIKit
 import SnapKit
 
 class GradientView: UIView {
-    var gradient: CAGradientLayer?
-    
-    func prepare() {
-        self.backgroundColor = .green
-        self.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview()
-        }
-        
-        gradient = CAGradientLayer {
+    lazy var gradient: CAGradientLayer = {
             let gradient = CAGradientLayer()
             gradient.type = .axial
             gradient.colors = [
@@ -28,15 +20,16 @@ class GradientView: UIView {
             ]
             gradient.startPoint = CGPoint(x: 0, y: 0)
             gradient.endPoint = CGPoint(x: 1, y: 1)
-        }
-        guard let gradient = self.gradient else {
-            return
-        }
+        return gradient
+    }()
+    
+    func prepare() {
+        self.backgroundColor = UIColor(displayP3Red: 253, green: 245, blue: 230, alpha: 1)
         layer.addSublayer(gradient)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        gradient?.frame = bounds
+        gradient.frame = bounds
     }
 }

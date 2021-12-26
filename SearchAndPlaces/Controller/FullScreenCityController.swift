@@ -35,9 +35,21 @@ class FullScreenCityController: UIViewController {
     //MARK: - private functions
 
     private func setupView() {
+        let gradient = GradientView()
+        view.addSubview(gradient)
+        gradient.snp.makeConstraints { maker in
+            maker.edges.equalToSuperview()
+        }
+        gradient.prepare()
+        print(view.frame)
+        print(gradient.frame)
+        
         let mainView = fullScreenView()
         self.mainView = mainView
         view.addSubview(mainView)
+        mainView.snp.makeConstraints { maker in
+            maker.edges.equalToSuperview()
+        }
         mainView.prepare()
         
         guard let cityName = cityName else {
@@ -49,11 +61,11 @@ class FullScreenCityController: UIViewController {
             switch result {
                 case .success(let weatherData):
                     self.mainView?.createWeatherCells(data:weatherData)
-                mainView.mapView?.centerToLocation(weatherData.coord)
+                    mainView.mapView?.centerToLocation(weatherData.coord)
                 case .failure(_):
-                let alert = UIAlertController(title: "Warning", message: "Weather data didn't load", preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                    let alert = UIAlertController(title: "Warning", message: "Weather data didn't load", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -64,11 +76,10 @@ private extension MKMapView {
     //MARK: - internal functions
     
     func centerToLocation(_ location: WeatherService.Response.Coord , regionRadius: CLLocationDistance = 1000) {
-        let coordinateRegion = MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon ),
+        let coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon),
         latitudinalMeters: regionRadius,
         longitudinalMeters: regionRadius)
-      setRegion(coordinateRegion, animated: true)
+        setRegion(coordinateRegion, animated: true)
     }
 }
 
