@@ -18,21 +18,18 @@ class GradientView: UIView {
             maker.edges.equalToSuperview()
         }
         
-        gradient = CAGradientLayer {
-            let gradient = CAGradientLayer()
-            gradient.type = .axial
-            gradient.colors = [
-                UIColor.black.withAlphaComponent(0.96).cgColor,
-                UIColor.darkGray.withAlphaComponent(0.02).cgColor,
-                UIColor.black.withAlphaComponent(0.96).cgColor
-            ]
-            gradient.startPoint = CGPoint(x: 0, y: 0)
-            gradient.endPoint = CGPoint(x: 1, y: 1)
-        }
-        guard let gradient = self.gradient else {
-            return
-        }
+        let gradient = CAGradientLayer()
+        gradient.type = .axial
+        gradient.colors = [
+            UIColor.black.withAlphaComponent(0.96).cgColor,
+            UIColor.darkGray.withAlphaComponent(0.02).cgColor,
+            UIColor.black.withAlphaComponent(0.96).cgColor
+        ]
+        gradient.startPoint = CGPoint(x: 0, y: 0)
+        gradient.endPoint = CGPoint(x: 1, y: 1)
+        
         layer.addSublayer(gradient)
+        self.gradient = gradient
     }
     
     override func layoutSubviews() {
