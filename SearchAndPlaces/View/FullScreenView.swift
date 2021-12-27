@@ -67,6 +67,9 @@ class fullScreenView: UIView {
         self.backgroundColor = .lightGray
         let gradient = GradientView()
         self.addSubview(gradient)
+        gradient.snp.makeConstraints { maker in
+            maker.edges.equalToSuperview()
+        }
         gradient.prepare()
         print(gradient.frame)
     }

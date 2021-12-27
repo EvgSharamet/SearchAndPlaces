@@ -14,9 +14,6 @@ class GradientView: UIView {
     
     func prepare() {
         self.backgroundColor = .green
-        self.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview()
-        }
         
         let gradient = CAGradientLayer()
         gradient.type = .axial
