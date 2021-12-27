@@ -19,6 +19,7 @@
 		8593CBEB2776146F008FC75B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8593CBEA2776146F008FC75B /* GradientView.swift */; };
 		85BCE5C3276664F6002A5AEB /* FullScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BCE5C2276664F6002A5AEB /* FullScreenView.swift */; };
 		85D996782757BC8B00FAAFC4 /* WeatherCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D996772757BC8B00FAAFC4 /* WeatherCellView.swift */; };
+		85E68AD32778DA1E00FA09B9 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E68AD22778DA1E00FA09B9 /* SpinnerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		8593CBEA2776146F008FC75B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		85BCE5C2276664F6002A5AEB /* FullScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenView.swift; sourceTree = "<group>"; };
 		85D996772757BC8B00FAAFC4 /* WeatherCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCellView.swift; sourceTree = "<group>"; };
+		85E68AD22778DA1E00FA09B9 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				856C8ECC273BFDEF008C2126 /* MainNavigationController.swift */,
 				856C8ED4273C0364008C2126 /* SearchViewController.swift */,
 				856C8EDC273EB1A6008C2126 /* FullScreenCityController.swift */,
+				85E68AD22778DA1E00FA09B9 /* SpinnerViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				8593CBEB2776146F008FC75B /* GradientView.swift in Sources */,
 				85D996782757BC8B00FAAFC4 /* WeatherCellView.swift in Sources */,
 				8593CBE92776028D008FC75B /* AppDelegate.swift in Sources */,
+				85E68AD32778DA1E00FA09B9 /* SpinnerViewController.swift in Sources */,
 				85BCE5C3276664F6002A5AEB /* FullScreenView.swift in Sources */,
 				856C8ED5273C0364008C2126 /* SearchViewController.swift in Sources */,
 				856C8EDD273EB1A6008C2126 /* FullScreenCityController.swift in Sources */,

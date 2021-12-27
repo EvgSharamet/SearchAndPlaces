@@ -29,7 +29,7 @@ class FullScreenCityController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        self.setupView()
     }
     
     //MARK: - private functions
@@ -41,8 +41,6 @@ class FullScreenCityController: UIViewController {
             maker.edges.equalToSuperview()
         }
         gradient.prepare()
-        print(view.frame)
-        print(gradient.frame)
         
         let mainView = fullScreenView()
         self.mainView = mainView
@@ -56,17 +54,24 @@ class FullScreenCityController: UIViewController {
             return
         }
         mainView.cityNameLabel?.text = cityName
-
-        WeatherService.shared.requestWeatherOf(place: cityName) { result in
-            switch result {
-                case .success(let weatherData):
-                    self.mainView?.createWeatherCells(data:weatherData)
-                    mainView.mapView?.centerToLocation(weatherData.coord)
-                case .failure(_):
-                    let alert = UIAlertController(title: "Warning", message: "Weather data didn't load", preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+        
+        let spinner = SpinnerViewController()
+        view.addSubview(spinner.view)
+        spinner.view.frame = view.frame
+        DispatchQueue.main.async {
+            self.view.addSubview(spinner.view)
+                WeatherService.shared.requestWeatherOf(place: cityName) { result in
+                switch result {
+                    case .success(let weatherData):
+                        self.mainView?.createWeatherCells(data:weatherData)
+                        mainView.mapView?.centerToLocation(weatherData.coord)
+                    case .failure(_):
+                        let alert = UIAlertController(title: "Warning", message: "Weather data didn't load", preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                }
             }
+          spinner.view.removeFromSuperview()
         }
     }
 }
