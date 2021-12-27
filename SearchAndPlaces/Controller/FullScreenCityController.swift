@@ -40,7 +40,6 @@ class FullScreenCityController: UIViewController {
         gradient.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
-        gradient.prepare()
         
         let mainView = fullScreenView()
         self.mainView = mainView
