@@ -35,12 +35,6 @@ class FullScreenCityController: UIViewController {
     //MARK: - private functions
 
     private func setupView() {
-        let gradient = GradientView()
-        view.addSubview(gradient)
-        gradient.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview()
-        }
-        
         let mainView = fullScreenView()
         self.mainView = mainView
         view.addSubview(mainView)

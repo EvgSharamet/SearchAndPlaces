@@ -24,6 +24,7 @@ class fullScreenView: UIView {
     //MARK: - internal functions
     
     func prepare() {
+        setupView()
         setupMap()
         setupMainStackView()
     }
