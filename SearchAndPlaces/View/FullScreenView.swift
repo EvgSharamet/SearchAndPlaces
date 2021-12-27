@@ -59,6 +59,23 @@ class fullScreenView: UIView {
     
     //MARK: - private functions
     
+<<<<<<< HEAD
+=======
+    private func  setupView() {
+        self.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        self.backgroundColor = .lightGray
+        let gradient = GradientView()
+        self.addSubview(gradient)
+        gradient.snp.makeConstraints { maker in
+            maker.edges.equalToSuperview()
+        }
+        gradient.prepare()
+        print(gradient.frame)
+    }
+    
+>>>>>>> 269f97c8f77d302ba54092a3d5a3b7df6f087c36
     private func setupMap() {
         let mapView = MKMapView()
         self.mapView = mapView
