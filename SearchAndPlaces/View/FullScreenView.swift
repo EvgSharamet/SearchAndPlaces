@@ -10,7 +10,7 @@ import SnapKit
 import UIKit
 import MapKit
 
-class fullScreenView: UIView {
+class FullScreenView: UIView {
     
     //MARK: - data
     

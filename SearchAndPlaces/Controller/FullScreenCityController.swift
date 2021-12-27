@@ -23,7 +23,7 @@ class FullScreenCityController: UIViewController {
     
     private var mapView: MKMapView?
     private var fullScreenStackView: UIStackView?
-    private var mainView: fullScreenView?
+    private var mainView: FullScreenView?
     
     //MARK: - internal functions
     
@@ -35,7 +35,7 @@ class FullScreenCityController: UIViewController {
     //MARK: - private functions
 
     private func setupView() {
-        let mainView = fullScreenView()
+        let mainView = FullScreenView()
         self.mainView = mainView
         view.addSubview(mainView)
         mainView.snp.makeConstraints { maker in
