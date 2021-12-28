@@ -20,7 +20,8 @@ class FullScreenCityController: UIViewController {
     //MARK: - data
     
     var cityName: String?
-    
+   
+    private var spinner = SpinnerView()
     private var mapView: MKMapView?
     private var fullScreenStackView: UIStackView?
     private var mainView: FullScreenView?
@@ -48,13 +49,12 @@ class FullScreenCityController: UIViewController {
         }
         mainView.cityNameLabel?.text = cityName
         
-        let spinner = SpinnerView()
         view.addSubview(spinner)
         spinner.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
-        spinner.prepare()
-        self.view.addSubview(spinner)
+        spinner.setupView()
+        self.lockScreen()
         WeatherService.shared.requestWeatherOf(place: cityName) { result in
             switch result {
                 case .success(let weatherData):
@@ -65,10 +65,19 @@ class FullScreenCityController: UIViewController {
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
             }
-            spinner.removeFromSuperview()
+            self.unlockScreen()
         }
     }
+    
+    private func lockScreen() {
+        spinner.isHidden = false
+    }
+    
+    private func unlockScreen() {
+        spinner.isHidden = true
+    }
 }
+
 
 private extension MKMapView {
     
