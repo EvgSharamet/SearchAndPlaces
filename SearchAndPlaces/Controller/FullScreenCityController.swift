@@ -48,23 +48,24 @@ class FullScreenCityController: UIViewController {
         }
         mainView.cityNameLabel?.text = cityName
         
-        let spinner = SpinnerViewController()
-        view.addSubview(spinner.view)
-        spinner.view.frame = view.frame
-        DispatchQueue.main.async {
-            self.view.addSubview(spinner.view)
-                WeatherService.shared.requestWeatherOf(place: cityName) { result in
-                switch result {
-                    case .success(let weatherData):
-                        self.mainView?.createWeatherCells(data:weatherData)
-                        mainView.mapView?.centerToLocation(weatherData.coord)
-                    case .failure(_):
-                        let alert = UIAlertController(title: "Warning", message: "Weather data didn't load", preferredStyle: UIAlertController.Style.alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                }
+        let spinner = SpinnerView()
+        view.addSubview(spinner)
+        spinner.snp.makeConstraints { maker in
+            maker.edges.equalToSuperview()
+        }
+        spinner.prepare()
+        self.view.addSubview(spinner)
+        WeatherService.shared.requestWeatherOf(place: cityName) { result in
+            switch result {
+                case .success(let weatherData):
+                    self.mainView?.createWeatherCells(data:weatherData)
+                    mainView.mapView?.centerToLocation(weatherData.coord)
+                case .failure(_):
+                    let alert = UIAlertController(title: "Warning", message: "Weather data didn't load", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
             }
-          spinner.view.removeFromSuperview()
+            spinner.removeFromSuperview()
         }
     }
 }
