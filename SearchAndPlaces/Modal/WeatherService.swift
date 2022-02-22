@@ -113,6 +113,4 @@ class WeatherService {
         
         return WeatherData(coord: WeatherService.Response.Coord(lat: answer.lat,lon: answer.lon), today: weatherInfoToday, tomorrow: weatherInfoTomorrow )
     }
-    
-    private init() {}
 }
