@@ -1,6 +1,6 @@
 # SearchAndPlaces
 
-SearchAndPlaces
+*SearchAndPlaces*
 
 Установка
 
